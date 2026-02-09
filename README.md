@@ -36,6 +36,4 @@ This project is licensed under the MIT License.
 
 ## Authors
 
-Parthsinh R. Thakor
-Dharmik S. Aslaliya
-Meet N. Parmar
+Parthsinh R. Thakor, Dharmik S. Aslaliya, Meet N. Parmar
