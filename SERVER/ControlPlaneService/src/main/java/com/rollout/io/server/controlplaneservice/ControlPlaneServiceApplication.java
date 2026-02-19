@@ -8,7 +8,7 @@ public class ControlPlaneServiceApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ControlPlaneServiceApplication.class, args);
-        System.out.println("Control Plane Service is running...");
+        System.out.println("Control Plane Service is running..");
     }
 
 }
