@@ -65,5 +65,7 @@ springdoc:
   swagger-ui:
     persistAuthorization: true
     urls:
-      - name: auth-service
+      - name: AUTH-SERVICE
         url: /authservice/v3/api-docs
+      - name: CONTROL-PLANE-SERVICE
+        url: /controlplaneservice/v3/api-docs

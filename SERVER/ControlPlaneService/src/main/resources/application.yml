@@ -1,0 +1,24 @@
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+
+  swagger-ui:
+    enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+
+  endpoint:
+    prometheus:
+      enabled: true
+
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+spring:
+  profiles:
+    active: dev-controlplaneservice

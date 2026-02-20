@@ -41,6 +41,7 @@ public class SecurityConfig implements WebFluxConfigurer {
                                 "/",
                                 "/login",
                                 "/authservice/v3/api-docs/**",
+                                "/controlplaneservice/v3/api-docs/**",
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",
                                 "/webjars/**",
