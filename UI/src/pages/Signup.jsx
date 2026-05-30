@@ -49,6 +49,7 @@ const Signup = () => {
                 if (name) {
                     await authApi(`/users/me/display-name?displayName=${encodeURIComponent(name)}`, { method: 'PATCH' });
                 }
+                await authApi('/users/me/login-notify', { method: 'POST' });
             } catch (syncError) {
                 console.warn('Backend identity sync failed:', syncError);
                 throw new Error("SERVER_DOWN");
@@ -69,6 +70,7 @@ const Signup = () => {
             setUser(userCredential.user);
             try {
                 await authApi('/users/me');
+                await authApi('/users/me/login-notify', { method: 'POST' });
             } catch (syncError) {
                 console.warn('Backend identity sync failed:', syncError);
                 throw new Error("SERVER_DOWN");

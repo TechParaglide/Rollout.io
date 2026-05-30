@@ -104,6 +104,11 @@ Rollout.io implements an asynchronous, event-driven cascade deletion pipeline us
   <img src="ASSETS/cascading_deletion_flow.svg" alt="Rollout.io Event-Driven Cascading Deletion Flow" width="100%">
 </div>
 
+### Security Email Notifications
+Rollout.io implements a fully asynchronous security email notification system using **Resend SMTP**:
+* **Sign-In & Sign-Out Alerts**: Non-blocking HTML alerts dispatched instantly via Spring Boot's `@Async` scheduler.
+* **Proxy-Aware Geolocation**: Traverses GCP `X-Forwarded-For` load balancer headers to resolve client IP and maps geographic locations dynamically.
+
 ### Centralized Configuration Server
 All microservices in the Rollout.io ecosystem decouple their environment properties and secrets using Spring Cloud Config Server. At boot time:
 * Microservices bootstrap by requesting configurations from the central Config Server (port 4998).

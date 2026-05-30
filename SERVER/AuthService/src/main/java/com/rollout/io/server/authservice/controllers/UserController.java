@@ -2,8 +2,10 @@ package com.rollout.io.server.authservice.controllers;
 
 import com.rollout.io.server.authservice.entity.User;
 import com.rollout.io.server.authservice.helpers.ApiResponseBuilder;
+import com.rollout.io.server.authservice.helpers.GeoLocationHelper;
 import com.rollout.io.server.authservice.objects.ApiResponse;
 import com.rollout.io.server.authservice.service.UserService;
+import com.rollout.io.server.authservice.service.EmailService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotBlank;
@@ -26,6 +28,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserService userService;
+    private final EmailService emailService;
 
     /**
      * Retrieves the profile of the current authenticated developer.
@@ -85,5 +88,38 @@ public class UserController {
         return ApiResponseBuilder.out(HttpStatus.OK, "User deleted successfully", null);
     }
 
+    /**
+     * Sends an email notification to the user about a successful sign-in event.
+     */
+    @PostMapping("/me/login-notify")
+    @Operation(summary = "Login Notification", description = "Sends a security alert email upon successful sign-in.")
+    public ResponseEntity<ApiResponse<Void>> notifyLogin(
+            @AuthenticationPrincipal Jwt jwt,
+            jakarta.servlet.http.HttpServletRequest request
+    ) {
+        User user = userService.syncUser(jwt);
+        String userAgent = request.getHeader("User-Agent");
+        String ipAddress = GeoLocationHelper.resolveClientIp(request);
 
+        emailService.sendLoginNotification(user, ipAddress, userAgent);
+        return ApiResponseBuilder.out(HttpStatus.OK, "Login notification dispatched successfully", null);
+    }
+
+    /**
+     * Sends an email notification to the user about a successful sign-out event.
+     */
+    @PostMapping("/me/logout-notify")
+    @Operation(summary = "Logout Notification", description = "Sends an activity alert email upon successful sign-out.")
+    public ResponseEntity<ApiResponse<Void>> notifyLogout(
+            @AuthenticationPrincipal Jwt jwt,
+            jakarta.servlet.http.HttpServletRequest request
+    ) {
+        User user = userService.syncUser(jwt);
+        String userAgent = request.getHeader("User-Agent");
+        String ipAddress = GeoLocationHelper.resolveClientIp(request);
+
+        emailService.sendLogoutNotification(user, ipAddress, userAgent);
+        return ApiResponseBuilder.out(HttpStatus.OK, "Logout notification dispatched successfully", null);
+    }
+    
 }

@@ -82,7 +82,7 @@ const AdminProfile = ({ isOpen, onToggle }) => {
 
                     <button 
                         onClick={async () => {
-                            try { await authApi('/auth/logout', { method: 'POST' }); } catch (e) {}
+                            try { await authApi('/users/me/logout-notify', { method: 'POST' }); } catch (e) { console.warn("Logout notification failed:", e); }
                             try { await auth.signOut(); } catch (e) {}
                             logout();
                             queryClient.removeQueries();
