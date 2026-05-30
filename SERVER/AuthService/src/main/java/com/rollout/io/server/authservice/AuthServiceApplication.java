@@ -3,6 +3,7 @@ package com.rollout.io.server.authservice;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
  * Main application class for the Auth Service.
@@ -12,6 +13,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  *
  * @author Parthsinh Thakor
  */
+@EnableAsync
 @EnableDiscoveryClient
 @SpringBootApplication
 public class AuthServiceApplication {

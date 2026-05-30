@@ -45,8 +45,9 @@ const Login = () => {
             // Sync user identity to backend (must complete before navigating)
             try {
                 await authApi('/users/me');
+                await authApi('/users/me/login-notify', { method: 'POST' });
             } catch (syncError) {
-                console.warn('Backend identity sync failed:', syncError);
+                console.warn('Backend identity sync/notification failed:', syncError);
             }
             // Flush ALL stale data from previous user sessions before navigating
             queryClient.removeQueries();
@@ -68,8 +69,9 @@ const Login = () => {
             // Sync user identity to backend (must complete before navigating)
             try {
                 await authApi('/users/me');
+                await authApi('/users/me/login-notify', { method: 'POST' });
             } catch (syncError) {
-                console.warn('Backend identity sync failed:', syncError);
+                console.warn('Backend identity sync/notification failed:', syncError);
             }
             // Flush ALL stale data from previous user sessions before navigating
             queryClient.removeQueries();
